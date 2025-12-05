@@ -3,22 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
+#    By: mjoao-fr <mjoao-fr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 15:15:55 by mjoao-fr          #+#    #+#              #
-#    Updated: 2025/12/04 12:19:54 by mjoao-fr         ###   ########.fr        #
+#    Updated: 2025/12/05 12:43:34 by mjoao-fr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXXFLAGS	= -Wall -Wextra -Werror -g -std=c++98
-NAME		= PhoneBook
-SRCS		= Contact.cpp PhoneBook.cpp
+NAME		= phonebook
+SRCS		= Contact.cpp PhoneBook.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Megaphone compiled."
+	@echo "Phonebook compiled."
 	@c++ $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
