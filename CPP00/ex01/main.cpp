@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:20 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/07 12:52:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 15:29:08 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ int main(void)
 {
     std::string option;
     PhoneBook phoneBook;
-
-	//ERROS:
-	//2) Depois de fazer o SEARCH, o prompt para selecionar o ADD(...) aparece duplicado
 	
 	std::cout << std:: endl;
     while (1)

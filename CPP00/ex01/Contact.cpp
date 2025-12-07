@@ -6,11 +6,19 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:28 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/04 22:25:28 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 15:32:45 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+
+Contact::Contact()
+{	
+}
+
+Contact::~Contact()
+{
+}
 
 void Contact::setFirstName(const std::string &firstName)
 {

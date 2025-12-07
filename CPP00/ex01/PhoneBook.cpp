@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:26 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/07 15:20:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 15:32:09 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ PhoneBook::PhoneBook()
 {
 	contactCount = 0;
 	index = 0;
+}
+
+PhoneBook::~PhoneBook()
+{
 }
 
 void	detectEof()
@@ -92,14 +96,6 @@ std::string truncate(std::string str)
 		return (str.substr(0, 9) + '.');
 	return (str);
 }
-
-// int	checkInput(std::string option)
-// {
-// 	if (option == "0" || option == "1" || option == "2" || option == "3"
-// 		|| option == "4" || option == "5" || option == "6" || option == "7" || option == "8")
-// 		return (0);
-// 	return (1);
-// }
 
 void	PhoneBook::searchContact()
 {

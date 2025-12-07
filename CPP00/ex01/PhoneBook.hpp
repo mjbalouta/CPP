@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:05:35 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/07 12:38:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 15:31:50 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class PhoneBook
 	
 	public:
 		PhoneBook();
+		~PhoneBook();
 		void addContact();
 		void searchContact();
 };
