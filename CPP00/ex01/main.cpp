@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:20 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/05 16:37:31 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 11:29:08 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,21 @@ int main(void)
     std::string option;
     PhoneBook phoneBook;
 
-	//FALTA O CONTROLO PARA NAO FICAR EM LOOP INFINITO COM CTRL+D
+	//ERROS:
+	//1) Quando preencho 8 pessoas e vou para a 9ª pessoa, substitui a do index 0, mas os restantes são apagados
+	//2) Depois de fazer o SEARCH, o prompt para selecionar o ADD(...) aparece duplicado
+	
     while (1)
     {
         std::cout << "Select an option between ADD, SEARCH AND EXIT" << std::endl;
-        std::cin >> option;
+        getline(std::cin, option);
+		if (std::cin.eof())
+		{
+			std::cout << std::endl;
+			break;
+		}
+		else if (option.empty())
+			continue;
         if (option == "ADD")
             phoneBook.addContact();
 		else if (option == "SEARCH")

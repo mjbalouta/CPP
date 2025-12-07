@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:26 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/05 16:35:45 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 11:29:39 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ PhoneBook::PhoneBook()
 	contactCount = 0;
 }
 
+void	detectEof()
+{
+	if (std::cin.eof())
+	{
+		std::cout << std::endl;
+		exit(0);
+	}
+}
+
 void	PhoneBook::addContact()
 {
 	std::string input;
@@ -24,12 +33,10 @@ void	PhoneBook::addContact()
 	if (contactCount == 8)
 		contactCount = 0;
 	
-	//tells the input stream to ignore characters in the buffer (prevents it from interpreting leftover '\n' as input)
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	
 	do {
 		std::cout << "Enter first name: " << std::endl;
 		std::getline(std::cin, input);
+		detectEof();
 		if (input.empty())
 			std::cout << "First name cannot be empty." << std::endl;
 	} while (input.empty());
@@ -38,6 +45,7 @@ void	PhoneBook::addContact()
 	do {
 		std::cout << "Enter last name: " << std::endl;
 		std::getline(std::cin, input);
+		detectEof();
 		if (input.empty())
 			std::cout << "Last name cannot be empty." << std::endl;
 	} while (input.empty());
@@ -46,6 +54,7 @@ void	PhoneBook::addContact()
 	do {
 		std::cout << "Enter nickname: " << std::endl;
 		std::getline(std::cin, input);
+		detectEof();
 		if (input.empty())
 			std::cout << "Nickname cannot be empty." << std::endl;
 	} while (input.empty());
@@ -54,6 +63,7 @@ void	PhoneBook::addContact()
 	do {
 		std::cout << "Enter phone number: " << std::endl;
 		std::getline(std::cin, input);
+		detectEof();
 		if (input.empty())
 			std::cout << "Phone number cannot be empty." << std::endl;
 	} while (input.empty());
@@ -62,6 +72,7 @@ void	PhoneBook::addContact()
 	do {
 		std::cout << "Enter darkest secret: " << std::endl;
 		std::getline(std::cin, input);
+		detectEof();
 		if (input.empty())
 			std::cout << "Darkest secret cannot be empty." << std::endl;
 	} while (input.empty());
@@ -81,6 +92,7 @@ std::string truncate(std::string str)
 void	PhoneBook::searchContact()
 {
 	int option;
+	
 	std::cout << std::endl << std::setw(10) << "Index";
 	std::cout << "|" << std::setw(10) << "First Name";
 	std::cout << "|" << std::setw(10) << "Last Name";
@@ -99,6 +111,7 @@ void	PhoneBook::searchContact()
 	do {
 		std::cout << "Select which contact you want to search based on its index:" << std::endl;
 		std::cin >> option;
+		detectEof();
 		if (option < 0 || option > 7)
 			std::cout << "Wrong index. Try again." << std::endl;
 	} while(option < 0 || option > 7);
