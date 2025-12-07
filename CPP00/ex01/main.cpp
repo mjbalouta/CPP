@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:20 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/07 12:05:29 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 12:52:20 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int main(void)
 	//ERROS:
 	//2) Depois de fazer o SEARCH, o prompt para selecionar o ADD(...) aparece duplicado
 	
+	std::cout << std:: endl;
     while (1)
     {
-        std::cout << "Select an option between ADD(1), SEARCH(2) AND EXIT(3)" << std::endl;
+        std::cout << YELLOW << "Select an option between ADD(1), SEARCH(2) AND EXIT(3)" << RESET << std::endl;
         getline(std::cin, option);
 		if (std::cin.eof())
 		{
@@ -38,7 +39,7 @@ int main(void)
         else if (option == "EXIT" || option == "exit" || option == "3")
             return (0);
         else
-            std::cout << "Invalid option." << std::endl;
+            std::cout << RED << "Invalid option." << RESET << std::endl;
     }
     return (0);
 }

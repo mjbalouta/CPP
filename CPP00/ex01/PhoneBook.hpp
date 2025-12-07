@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:05:35 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/07 11:55:08 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 12:38:20 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <cstdlib> 
 #include <limits>
 #include "Contact.hpp"
+
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
 
 class PhoneBook
 {
