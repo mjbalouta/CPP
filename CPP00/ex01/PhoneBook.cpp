@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 12:22:26 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/07 11:29:39 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/12/07 12:04:02 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 PhoneBook::PhoneBook()
 {
 	contactCount = 0;
+	index = 0;
 }
 
 void	detectEof()
@@ -30,8 +31,8 @@ void	PhoneBook::addContact()
 {
 	std::string input;
 	
-	if (contactCount == 8)
-		contactCount = 0;
+	if (index == 8)
+		index = 0;
 	
 	do {
 		std::cout << "Enter first name: " << std::endl;
@@ -40,7 +41,7 @@ void	PhoneBook::addContact()
 		if (input.empty())
 			std::cout << "First name cannot be empty." << std::endl;
 	} while (input.empty());
-	contacts[contactCount].setFirstName(input);
+	contacts[index].setFirstName(input);
 
 	do {
 		std::cout << "Enter last name: " << std::endl;
@@ -49,7 +50,7 @@ void	PhoneBook::addContact()
 		if (input.empty())
 			std::cout << "Last name cannot be empty." << std::endl;
 	} while (input.empty());
-	contacts[contactCount].setLastName(input);
+	contacts[index].setLastName(input);
 
 	do {
 		std::cout << "Enter nickname: " << std::endl;
@@ -58,7 +59,7 @@ void	PhoneBook::addContact()
 		if (input.empty())
 			std::cout << "Nickname cannot be empty." << std::endl;
 	} while (input.empty());
-	contacts[contactCount].setNickname(input);
+	contacts[index].setNickname(input);
 
 	do {
 		std::cout << "Enter phone number: " << std::endl;
@@ -67,7 +68,7 @@ void	PhoneBook::addContact()
 		if (input.empty())
 			std::cout << "Phone number cannot be empty." << std::endl;
 	} while (input.empty());
-	contacts[contactCount].setPhoneNumber(input);
+	contacts[index].setPhoneNumber(input);
 
 	do {
 		std::cout << "Enter darkest secret: " << std::endl;
@@ -76,9 +77,11 @@ void	PhoneBook::addContact()
 		if (input.empty())
 			std::cout << "Darkest secret cannot be empty." << std::endl;
 	} while (input.empty());
-	contacts[contactCount].setDarkestSecret(input);
+	contacts[index].setDarkestSecret(input);
 
-	contactCount++;
+	index++;
+	if (contactCount < 8)
+		contactCount++;
 	std::cout << "Contact added to the Phonebook." << std::endl;
 }
 
