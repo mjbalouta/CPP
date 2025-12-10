@@ -1,0 +1,5 @@
+megaphone
+*.o
+.vscode
+phonebook
+bank
