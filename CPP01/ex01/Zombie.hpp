@@ -21,3 +21,5 @@ class Zombie
 	Zombie(std::string name);
 	
 };
+
+Zombie *zombieHorde(int N, std::string name); //is it here??
