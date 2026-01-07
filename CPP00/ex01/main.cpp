@@ -20,7 +20,7 @@ int main(void)
 	std::cout << std:: endl;
     while (1)
     {
-        std::cout << YELLOW << "Select an option between ADD(1), SEARCH(2) AND EXIT(3)" << RESET << std::endl;
+        std::cout << YELLOW << "Select an option between ADD, SEARCH AND EXIT" << RESET << std::endl;
         getline(std::cin, option);
 		if (std::cin.eof())
 		{
@@ -29,11 +29,11 @@ int main(void)
 		}
 		else if (option.empty())
 			continue;
-        if (option == "ADD" || option == "add" || option == "1")
+        if (option == "ADD")
             phoneBook.addContact();
-		else if (option == "SEARCH" || option == "search" || option == "2")
+		else if (option == "SEARCH")
 			phoneBook.searchContact();
-        else if (option == "EXIT" || option == "exit" || option == "3")
+        else if (option == "EXIT")
             return (0);
         else
             std::cout << RED << "Invalid option." << RESET << std::endl;

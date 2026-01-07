@@ -110,6 +110,7 @@ int	Account::checkAmount(void) const
 
 void Account::_displayTimestamp(void)
 {
+	// std::cout << "[19920104_091532] ";
 	std::time_t now = std::time(0); //gets the current timestamp
 	std::tm *timeinfo = std::localtime(&now); //converts it to a tm structure (year/month/day)
 
@@ -117,15 +118,15 @@ void Account::_displayTimestamp(void)
 	<< (timeinfo->tm_year + 1900) << std::setfill('0') << std::setw(2) //setfill fills the remaining digits with '0'
 	<< timeinfo->tm_mon + 1 << std::setw(2) << timeinfo->tm_mday
 	<< '_' << std::setw(2) << timeinfo->tm_hour << std::setw(2)
-	<< timeinfo->tm_min << std::setw(2) << timeinfo->tm_sec << ']';
+	<< timeinfo->tm_min << std::setw(2) << timeinfo->tm_sec << "] ";
 }
 
 void Account::displayStatus(void) const
 {
 	_displayTimestamp();
-	std::cout << "index:" << _accountIndex;
-	std::cout << "amount:" << _amount;
-	std::cout << "deposits:" << _nbDeposits;
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "deposits:" << _nbDeposits << ";";
 	std::cout << "withdrawals:" << _nbWithdrawals << std::endl;
 }
 
