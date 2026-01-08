@@ -6,9 +6,12 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 11:48:17 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/12/11 16:24:18 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/08 13:30:01 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef ZOMBIE_HPP
+#define ZOMBIE_HPP
 
 #include <iostream>
 #define RED "\033[91m"
@@ -27,3 +30,5 @@ class Zombie
 
 Zombie *newZombie(std::string name);
 void randomChump(std::string name);
+
+#endif
