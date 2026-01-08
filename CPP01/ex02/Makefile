@@ -6,19 +6,19 @@
 #    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/28 15:15:55 by mjoao-fr          #+#    #+#              #
-#    Updated: 2025/12/10 15:58:24 by mjoao-fr         ###   ########.fr        #
+#    Updated: 2026/01/08 14:16:53 by mjoao-fr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXXFLAGS	= -Wall -Wextra -Werror -g -std=c++98
-NAME		= bank
-SRCS		= Account.cpp tests.cpp
+NAME		= brain
+SRCS		= main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Bank compiled."
+	@echo "Brain compiled."
 	@c++ $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
