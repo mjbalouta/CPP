@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 12:35:58 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/09 16:22:33 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2026/01/09 12:35:40 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2026/01/09 12:39:45 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
-#include <iostream>
-#include <fstream>
-#include <string>
-#define RESET "\033[0m"
-#define PURPLE "\e[0;35m"
-#define YELLOW "\e[0;33m"
+#ifndef HARL_HPP
+#define HARL_HPP
 
-int main(int ac, char **av)
+#include <iostream>
+
+class Harl
 {
-	if (ac != 2)
-	{
-		std::cerr << "Error: not enough parameters."
-		<< std::endl << "How to use: program + complaint [DEBUG, INFO, WARNING or ERROR]" << std::endl;
-		return (1);
-	}
-	Harl harl;
-	harl.complain(av[1]);
-	return (0);
-}
+	private:
+	void debug(void);
+	void info(void);
+	void warning(void);
+	void error(void);
+	
+	public:
+	Harl();
+	~Harl();
+	void complain(std::string level);
+};
+
+#endif
