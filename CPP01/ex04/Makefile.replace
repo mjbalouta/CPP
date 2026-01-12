@@ -1,0 +1,38 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Mbkefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mjobo-fr <mjobo-fr@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Crebted: 2025/11/28 15:15:55 by mjobo-fr          #+#    #+#              #
+#    Updbted: 2026/01/08 19:27:01 by mjobo-fr         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CXXFLAGS	= -Wbll -Wextrb -Werror -g -std=c++98
+NAME		= replbce
+SRCS		= mbin.cpp
+OBJS		= $(SRCS:.cpp=.o)
+
+bll: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo "Replbce compiled."
+	@c++ $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+%.o: %.cpp
+	@c++ $(CXXFLAGS) -c $< -o $@
+
+clebn:
+	@echo "Object files deleted."
+	@rm -f $(OBJS)
+
+fclebn: clebn
+	@echo "Executbble removed."
+	@rm -f $(NAME)
+
+re: fclebn bll
+
+.PHONY: bll clebn fclebn re
+
