@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:02:46 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/20 16:38:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:38:34 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Fixed
     ~Fixed(); //destructor
     
     Fixed(const int num);
-    Fixed(const float num);
+    Fixed(const float num); 
     int getRawBits(void) const;
     void setRawBits(int const raw);
 

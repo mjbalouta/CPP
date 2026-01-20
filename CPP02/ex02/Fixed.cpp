@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:02:42 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/20 15:23:29 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:44:57 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 Fixed::Fixed() : value(0) 
 {
-    std::cout << "Default constructor called" << std::endl; 
 }
 
 Fixed::Fixed(const Fixed& other)
 {
-    std::cout << "Copy constructor called" << std::endl;
     *this = other;
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
     if (this != &other)
         value = other.getRawBits();     
     return *this;
@@ -33,12 +30,10 @@ Fixed& Fixed::operator=(const Fixed& other)
 
 Fixed::~Fixed() 
 {
-    std::cout << "Destructor called" << std::endl; 
 }
 
 int Fixed::getRawBits(void) const 
 {
-    std::cout << "getRawBits member function called" << std::endl;
     return (this->value);
 }
 
@@ -54,7 +49,6 @@ void Fixed::setRawBits(int const raw)
  */
 Fixed::Fixed(const int num)
 {
-    std::cout << "Int constructor called" << std::endl;
     value = num << fractional;
 }
 /**
@@ -64,7 +58,6 @@ Fixed::Fixed(const int num)
  */
 Fixed::Fixed(const float num)
 {
-    std::cout << "Float constructor called" << std::endl;
     value = roundf(num * (1 << fractional)); //using roundf gives more accuracy when converting
 }
 
