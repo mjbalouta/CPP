@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:02:42 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/20 15:23:29 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:47:58 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits(void) const 
 {
-    std::cout << "getRawBits member function called" << std::endl;
+    // std::cout << "getRawBits member function called" << std::endl;
     return (this->value);
 }
 

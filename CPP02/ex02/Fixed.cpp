@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 16:02:42 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/20 16:44:57 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:09:19 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,121 @@ int Fixed::toInt(void) const
     return (new_value);
 }
 
+bool Fixed::operator>(const Fixed& other) const
+{
+    return (this->value > other.value);
+}
+
+bool Fixed::operator<(const Fixed& other) const
+{
+    return (this->value < other.value);
+}
+
+bool Fixed::operator<=(const Fixed& other) const
+{
+    return (this->value <= other.value);
+}
+
+bool Fixed::operator>=(const Fixed& other) const
+{
+    return (this->value >= other.value);
+}
+
+bool Fixed::operator==(const Fixed& other) const
+{
+    return (this->value == other.value);
+}
+
+bool Fixed::operator!=(const Fixed& other) const
+{
+    return (this->value != other.value);
+}
+
+Fixed Fixed::operator+(const Fixed& other) const
+{
+    Fixed result;
+    result.setRawBits(this->value + other.value);
+    return (result);
+}
+
+Fixed Fixed::operator-(const Fixed& other) const
+{
+    Fixed result;
+    result.setRawBits(this->value - other.value);
+    return (result);
+}
+
+Fixed Fixed::operator*(const Fixed& other) const
+{
+    Fixed result;
+    result.setRawBits((this->value * other.value) >> fractional);
+    return (result);
+}
+
+Fixed Fixed::operator/(const Fixed& other) const
+{
+    Fixed result;
+    result.setRawBits((this->value << fractional) / other.value);
+    return (result);
+}
+
+Fixed& Fixed::operator++(void)
+{
+    value += 1;
+    return (*this); //returns the object updated
+}
+
+Fixed Fixed::operator++(int)
+{
+    Fixed temp = *this; //saves old value
+    value += 1; //increments value
+    return (temp); //returns old value
+}
+
+Fixed& Fixed::operator--(void)
+{
+    value -= 1;
+    return (*this);
+}
+
+Fixed Fixed::operator--(int)
+{
+    Fixed temp = *this;
+    value -= 1;
+    return (temp);
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+    if (a < b)
+        return (a);
+    else
+        return (b);
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+    if (a < b)
+        return (a);
+    else
+        return (b);
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+    if (a < b)
+        return (b);
+    else
+        return (a);
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+    if (a < b)
+        return (b);
+    else
+        return (a);
+}
 /**
  * @brief defines how to represent the Fixed class in the output stream
  * 
