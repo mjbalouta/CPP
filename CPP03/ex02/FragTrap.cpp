@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:03:47 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 11:24:19 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:25:08 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,20 @@ FragTrap::FragTrap() : ClapTrap()
 	std::cout << "FragTrap default constructor called." << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap& copy) : ClapTrap(copy) {}
+FragTrap::FragTrap(const FragTrap& copy) : ClapTrap(copy) 
+{
+	*this = copy;
+}
 
 FragTrap& FragTrap::operator=(const FragTrap& copy)
 {
 	if (this != &copy)
-		ClapTrap::operator=(copy);
+	{
+		_name = copy._name;
+		_hitPoints = copy._hitPoints;
+		_energyPoints = copy._energyPoints;
+		_attackDamage = copy._attackDamage;	
+	}
 	return *this;
 }
 

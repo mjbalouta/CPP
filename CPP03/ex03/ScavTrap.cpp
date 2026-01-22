@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:22:28 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 10:44:16 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:00:58 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ ScavTrap::ScavTrap() : ClapTrap()
 	std::cout << "ScavTrap default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy) {}
+ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy) 
+{
+	*this = copy;
+}
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& copy)
 {

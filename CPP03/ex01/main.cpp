@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:18:44 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 10:56:24 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:23:45 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int main(void)
 
 	std::cout << std::endl;
 	std::cout << "Bolota only has 48 points of energy left, so she can only attack 48 times more!" << std::endl; 
-	for (int i = 0; i < 200; i++)
+	for (int i = 0; i < 400; i++)
 		Bolota.attack("Joao");
 }

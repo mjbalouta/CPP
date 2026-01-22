@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:22:28 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 10:44:16 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:20:55 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,20 @@ ScavTrap::ScavTrap() : ClapTrap()
 	std::cout << "ScavTrap default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy) {}
+ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy) 
+{
+	*this = copy;
+}
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& copy)
 {
 	if (this != &copy)
-		ClapTrap::operator=(copy);
+	{
+		_name = copy._name;
+		_hitPoints = copy._hitPoints;
+		_energyPoints = copy._energyPoints;
+		_attackDamage = copy._attackDamage;
+	}
 	return *this;
 }
 
@@ -44,8 +52,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 
 void ScavTrap::guardGate()
 {
-	if (_hitPoints > 0 && _energyPoints > 0)
-		std::cout << "ScavTrap " << _name << " is now in Gate keeper mode." << std::endl;
+	std::cout << "ScavTrap " << _name << " is now in Gate keeper mode." << std::endl;
 }
 
 void ScavTrap::attack(const std::string &target)
