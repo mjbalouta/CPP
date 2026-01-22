@@ -6,20 +6,23 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:18:44 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 10:56:24 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 11:23:50 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main(void)
 {
 	ClapTrap a;
 	ClapTrap Maria("Maria");
 	ScavTrap Bolota("Bolota");
+	FragTrap Fraga("Fraga");
 	
-	std::cout << std::endl;
+	std::cout << std::endl << "---------------------------------------------------------------------------" << std::endl;
+	std::cout << std::endl << RED << "Maria's fight history: "<< std::endl;
 	Maria.attack("Joao");
 	Maria.takeDamage(2);
 	Maria.beRepaired(1);
@@ -33,7 +36,8 @@ int main(void)
 	Maria.takeDamage(10);
 	Maria.attack("Joao"); // will not be visible because Maria has no more hitPoints left
 	
-	std::cout << std::endl;
+	std::cout << RESET << "----------------------------------------------------------------------------" << std::endl;
+	std::cout << std::endl << PURPLE << "Bolota's fight history: " << std::endl;
 	Bolota.attack("Joao");
 	Bolota.guardGate();
 	Bolota.takeDamage(2);
@@ -43,4 +47,26 @@ int main(void)
 	std::cout << "Bolota only has 48 points of energy left, so she can only attack 48 times more!" << std::endl; 
 	for (int i = 0; i < 200; i++)
 		Bolota.attack("Joao");
+
+	std::cout << std::endl;
+	Bolota.takeDamage(100);
+	Bolota.attack("Joao"); // will not be visible because Bolota has no more hitPoints left
+
+	std::cout << RESET << std::endl << "----------------------------------------------------------------------------" << std::endl;
+	std::cout <<  YELLOW << std::endl << "Fraga's fight history: " << std::endl;
+	std::cout << std::endl;
+	Fraga.attack("Joao");
+	Fraga.takeDamage(2);
+	Fraga.beRepaired(1);
+	Fraga.highFivesGuys();
+
+	std::cout << std::endl;
+	std::cout << "Fraga only has 98 points of energy left, so she can only attack 98 times more!" << std::endl; 
+	for (int i = 0; i < 200; i++)
+		Fraga.attack("Joao");
+
+	std::cout << std::endl;
+	Fraga.takeDamage(100);
+	Fraga.attack("Joao"); // will not be visible because Fraga has no more hitPoints left
+	std::cout << RESET << std::endl;
 }

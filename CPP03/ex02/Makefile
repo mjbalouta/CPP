@@ -6,13 +6,13 @@
 #    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 19:17:41 by mjoao-fr          #+#    #+#              #
-#    Updated: 2026/01/22 10:40:19 by mjoao-fr         ###   ########.fr        #
+#    Updated: 2026/01/22 10:57:13 by mjoao-fr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXXFLAGS	= -Wall -Wextra -Werror -g -std=c++98
 NAME		= clap
-SRCS		= main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS		= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all: $(NAME)

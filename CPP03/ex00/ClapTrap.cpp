@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:18:38 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/21 21:41:31 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 10:07:43 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ ClapTrap::~ClapTrap()
 	std::cout << "Destructor called." << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string name)
+ClapTrap::ClapTrap(std::string name)
 {
 	_name = name;
 	_hitPoints = 10;

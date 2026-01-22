@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 19:18:42 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 10:07:36 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 11:17:59 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 #define CLAPTRAP_HPP
 
 #include <iostream>
+#define RED "\033[91m"
+#define RESET "\033[0m"
+#define PURPLE "\e[0;35m"
+#define YELLOW "\e[0;33m"
 
 class ClapTrap
 {
-	private:
+	protected:
 	std::string _name;
 	int _hitPoints;
 	int _energyPoints;
