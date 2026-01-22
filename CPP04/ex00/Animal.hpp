@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:23:51 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 17:31:28 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 23:21:52 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ class Animal
 	Animal();
 	Animal(const Animal& copy);
 	Animal& operator=(const Animal& copy);
-	~Animal();
+	virtual ~Animal();
 
-	void makeSound();
+	std::string getType() const;
+	virtual void makeSound() const;
 };
 
 #endif

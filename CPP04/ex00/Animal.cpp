@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:23:49 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 17:35:54 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 23:22:35 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ Animal& Animal::operator=(const Animal& copy)
 
 Animal::~Animal() {}
 
-void Animal::makeSound()
+void Animal::makeSound() const
 {
 	std::cout << "This animal makes an unidentifiable sound." << std::endl;
+}
+
+std::string Animal::getType() const
+{
+	return (_type);
 }

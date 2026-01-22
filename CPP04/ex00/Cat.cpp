@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 17:36:07 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 17:42:59 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/22 23:22:25 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ Cat& Cat::operator=(const Cat& copy)
 
 Cat::~Cat() {}
 
-void Cat::makeSound()
+void Cat::makeSound() const
 {
 	std::cout << "Meowwww" << std::endl;
 }
+
 

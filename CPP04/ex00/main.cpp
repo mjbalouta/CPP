@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/22 17:36:09 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 23:21:57 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2026/01/22 21:36:11 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2026/01/22 22:34:44 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-#define CAT_HPP
-
 #include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
 
-class Cat : public Animal
+int main() 
 {
-	public:
-	Cat();
-	Cat(const Cat& copy);
-	Cat& operator=(const Cat& copy);
-	~Cat();
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog(); 
+	const Animal* i = new Cat(); 
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl; 
+	i->makeSound(); //will output the cat sound!
+	j->makeSound(); 
+	meta->makeSound();
 
-	void makeSound() const;
-};
-
-#endif
+	delete meta;
+	delete j;
+	delete i;
+	
+	return 0;
+}

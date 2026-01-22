@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/22 17:36:09 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 23:21:57 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2026/01/22 21:29:31 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2026/01/22 23:22:29 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-#define CAT_HPP
+#include "Dog.hpp"
 
-#include "Animal.hpp"
-
-class Cat : public Animal
+Dog::Dog() : Animal() 
 {
-	public:
-	Cat();
-	Cat(const Cat& copy);
-	Cat& operator=(const Cat& copy);
-	~Cat();
+	_type = "Dog";
+}
 
-	void makeSound() const;
-};
+Dog::Dog(const Dog& copy) : Animal(copy)
+{
+	*this = copy;
+}
 
-#endif
+Dog& Dog::operator=(const Dog& copy)
+{
+	if (this != &copy)
+		_type = copy._type;
+	return *this;
+}
+
+Dog::~Dog() {}
+
+void Dog::makeSound() const
+{
+	std::cout << "Au Auu!" << std::endl;
+}
