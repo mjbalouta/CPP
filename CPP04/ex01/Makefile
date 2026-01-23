@@ -6,13 +6,13 @@
 #    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 19:17:41 by mjoao-fr          #+#    #+#              #
-#    Updated: 2026/01/23 09:33:46 by mjoao-fr         ###   ########.fr        #
+#    Updated: 2026/01/23 11:04:40 by mjoao-fr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXXFLAGS	= -Wall -Wextra -Werror -g -std=c++98
 NAME		= poly
-SRCS		= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+SRCS		= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all: $(NAME)
