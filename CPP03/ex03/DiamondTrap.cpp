@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:40:24 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 17:20:33 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/26 16:06:32 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 DiamondTrap::DiamondTrap()
 : ClapTrap("Diamond_clap_name"), FragTrap(), ScavTrap(), _name("Default")
 {
-	_hitPoints = FragTrap::_hitPoints;
-	_energyPoints = ScavTrap::_energyPoints;
-	_attackDamage = FragTrap::_attackDamage;
+	_hitPoints = FragTrap::_initialHitPoints;
+	_energyPoints = ScavTrap::_initialEnergyPoints;
+	_attackDamage = FragTrap::_initialAttackDamage;
 	std::cout << "DiamondTrap default constructor called." << std::endl;
 }
 
@@ -51,9 +51,12 @@ FragTrap(),
 ScavTrap(),
 _name(name)
 {
-	_hitPoints = FragTrap::_hitPoints;
-	_energyPoints = ScavTrap::_energyPoints;
-	_attackDamage = FragTrap::_attackDamage;
+	_hitPoints = FragTrap::_initialHitPoints;
+	// std::cout << "Hit Points: (should be 100) "<< _hitPoints << std::endl;
+	_energyPoints = ScavTrap::_initialEnergyPoints;
+	// std::cout << "Energy Points: (should be 50) "<< _energyPoints << std::endl;
+	_attackDamage = FragTrap::_initialAttackDamage;
+	// std::cout << "Attack Damage: (should be 30) "<< _attackDamage << std::endl;
 	std::cout << "DiamondTrap name constructor called." << std::endl;
 }
 void DiamondTrap::attack(const std::string& target)

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:21:39 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/22 12:22:07 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/26 15:50:28 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class ScavTrap : virtual public ClapTrap
 {
 	public:
+	static const int _initialEnergyPoints = 50;
 	ScavTrap();
 	ScavTrap(const ScavTrap& copy);
 	ScavTrap& operator=(const ScavTrap& copy);
