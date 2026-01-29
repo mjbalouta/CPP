@@ -23,8 +23,7 @@ int main(void)
 		std::cout << form << std::endl;
 		Bureaucrat m("Maria", 136);
 		m.signForm(form);
-		std::cout << form << std::endl;
-		form.execute(m);
+		m.executeForm(form);
 	}
 	catch (std::exception & e)
 	{
