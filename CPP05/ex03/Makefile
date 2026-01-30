@@ -1,0 +1,39 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/01/21 19:17:41 by mjoao-fr          #+#    #+#              #
+#    Updated: 2026/01/30 13:26:26 by mjoao-fr         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CXXFLAGS	= -Wall -Wextra -Werror -g -std=c++98
+NAME		= bureaucrat
+SRCS		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+			  RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
+OBJS		= $(SRCS:.cpp=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo "Bureaucrat compiled."
+	@c++ $(CXXFLAGS) $(OBJS) -o $(NAME)
+
+%.o: %.cpp
+	@c++ $(CXXFLAGS) -c $< -o $@
+
+clean:
+	@echo "Object files deleted."
+	@rm -f $(OBJS)
+
+fclean: clean
+	@echo "Executable removed."
+	@rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
