@@ -6,13 +6,14 @@
 #    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 19:17:41 by mjoao-fr          #+#    #+#              #
-#    Updated: 2026/01/28 11:47:31 by mjoao-fr         ###   ########.fr        #
+#    Updated: 2026/01/30 11:50:13 by mjoao-fr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXXFLAGS	= -Wall -Wextra -Werror -g -std=c++98
 NAME		= bureaucrat
-SRCS		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SRCS		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+			  RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all: $(NAME)
