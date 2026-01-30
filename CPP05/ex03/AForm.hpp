@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 18:12:54 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/30 13:29:23 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:49:34 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,6 @@ class AForm
 		virtual const char* what() const throw()
 		{
 			return "The form is not signed.";
-		}
-	};
-
-	class FormNotFoundException : public std::exception
-	{
-		public:
-		virtual const char* what() const throw()
-		{
-			return "Form not found.";
 		}
 	};
 };

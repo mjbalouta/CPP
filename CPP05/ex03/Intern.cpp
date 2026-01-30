@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 13:10:39 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/30 15:36:47 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:49:47 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ AForm* Intern::makeForm(const std::string& name, const std::string& target)
 		case 2:
 			return new PresidentialPardonForm(target);
 		default:
-			throw AForm::FormNotFoundException();
+			throw FormNotFoundException();
 	}
 }

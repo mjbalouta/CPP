@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:59:46 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/01/30 13:14:02 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/01/30 15:49:38 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ class Intern
 	~Intern();
 	
 	AForm* makeForm(const std::string& name, const std::string& target);
+
+	class FormNotFoundException : public std::exception
+	{
+		public:
+		virtual const char* what() const throw()
+		{
+			return "Form not found.";
+		}
+	};
 };
 
 #endif
