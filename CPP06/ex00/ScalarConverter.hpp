@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:54:36 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/02 16:44:45 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/02 16:47:23 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ class ScalarConverter
 	static bool detectFloat(const int countDots, const int countFs, const int countDigits, const std::string &data);
 	static bool detectInt(const int countDots, const int countFs, const int countDigits, const std::string &data);
 	static bool detectDouble(const int countDots, const int countFs, const int countDigits, const std::string &data);
-	static bool detectChar(const int countDots, const int countFs, const int countDigits, const std::string &data);
+	static bool detectChar(const int countDigits, const std::string &data);
 	
 	static void convertFromChar(const std::string& data);
 	static void convertFromInt(const std::string& data);

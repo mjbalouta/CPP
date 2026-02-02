@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:28:02 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/02 16:45:01 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:25:05 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ DataType ScalarConverter::detectFormat(const std::string& data)
 		return DOUBLE;
 	else if (detectInt(countDots, countFs, countDigits, data))
 		return INT;
-	else if (detectChar(countDots, countFs, countDigits, data))
+	else if (detectChar(countDigits, data))
 		return CHAR;
 	return INVALID;
 }
@@ -125,10 +125,8 @@ bool ScalarConverter::detectDouble(const int countDots, const int countFs, const
 	return false;
 }
 
-bool ScalarConverter::detectChar(const int countDots, const int countFs, const int countDigits, const std::string &data)
+bool ScalarConverter::detectChar(const int countDigits, const std::string &data)
 {
-	(void)countDots;
-	(void)countFs;
 	if (countDigits == 0 && data.length() == 1)
 		return true;
 	return false;
