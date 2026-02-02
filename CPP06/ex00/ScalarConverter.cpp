@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:28:02 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/02 16:02:25 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/02 16:45:01 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,9 +242,8 @@ void ScalarConverter::convertFromDouble(const std::string& data)
 	std::cout << std::endl;
 }
 
-void ScalarConverter::convertFromInvalid(const std::string& data)
+void ScalarConverter::convertFromInvalid(void)
 {
-	(void)data;
 	std::cout << "char: impossible" << std::endl;
  	std::cout << "int: impossible" << std::endl;
  	std::cout << "float: impossible" << std::endl;
@@ -270,6 +269,6 @@ void ScalarConverter::convert(const std::string& data)
 			convertFromDouble(data);
 			break;
 		default:
-			convertFromInvalid(data);
+			convertFromInvalid();
 	}
 }

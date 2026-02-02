@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:54:36 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/02 15:37:15 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/02 16:44:45 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ class ScalarConverter
 	static void convertFromInt(const std::string& data);
 	static void convertFromFloat(const std::string& data);
 	static void convertFromDouble(const std::string& data);
-	static void convertFromInvalid(const std::string& data);
+	static void convertFromInvalid(void);
 	
 
 	public:
