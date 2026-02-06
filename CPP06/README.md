@@ -1,16 +1,12 @@
-# CPP05
+# CPP06
 
 ## EX00
-<b>Main Problem</b>: To deal with errors implementing exception classes and try/catch().
+<b>Main Problem</b>: Apply static_cast to deal with different convertions (char, int, float, double).
 
 ## EX01
-<b>Main Problem</b>: Continue the implementation of exception classes but now with one more class involved.
+<b>Main Problem</b>: Apply reinterpret_cast to treat the same bits as a different type without changing them.
 
 ## EX02
-<b>Main Problem</b>: Apply abstract class with inheritance and polymorphism (make the derived classes implement the same action on their own). Make every requisit connect between each class in order for it to work as expected.
-
-## EX03
-<b>Main Problem</b>: Add another class that creates an object with memory allocation that will be used by other classes.
-
+<b>Main Problem</b>: Apply dynamic_cast in order to check the type of an object in runtime.
 
 
