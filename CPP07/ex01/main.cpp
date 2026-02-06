@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 16:23:44 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/06 18:20:21 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:26:43 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,23 @@ int main()
 	int arr[] = {1, 2, 3};
 	const int arr1[] = {4, 5, 6};
 
-	::iter(arr, 3, add);
+	std::cout << std::endl << "NORMAL ARRAY BEFORE: " << std::endl;
 	for (int i = 0; i < 3; i++)
 		std::cout << arr[i] << ",";
 	std::cout << std::endl;
+	::iter(arr, 3, add);
+	std::cout << std::endl << "NORMAL ARRAY AFTER: " << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << arr[i] << ",";
+	std::cout << std::endl;
+	std::cout << std::endl << "CONST ARRAY BEFORE: " << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << arr1[i] << ",";
+	std::cout << std::endl;
+	std::cout << std::endl << "CONST ARRAY AFTER: " << std::endl;
 	::iter(arr1, 3, print);
+	std::cout << std::endl;
+	std::cout << std::endl;
 	
 	return 0;
 }
