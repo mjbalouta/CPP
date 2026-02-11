@@ -1,12 +1,12 @@
 # CPP06
 
 ## EX00
-<b>Main Problem</b>: Apply static_cast to deal with different convertions (char, int, float, double).
+<b>Main Problem</b>: Implement function templates in order for them to work with any type of data (int, string, etc).
 
 ## EX01
-<b>Main Problem</b>: Apply reinterpret_cast to treat the same bits as a different type without changing them.
+<b>Main Problem</b>: Continue exploring template functions.Learn about the difference between using const/non const references.
 
 ## EX02
-<b>Main Problem</b>: Apply dynamic_cast in order to check the type of an object in runtime.
+<b>Main Problem</b>: Implement a class template.
 
 
