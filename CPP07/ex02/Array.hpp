@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:21:33 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/09 17:41:14 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:44:18 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Array
 	~Array();
 
 	unsigned int size() const;
+	T& operator[](unsigned int index);
 
 	class IndexException : public std::exception
 	{

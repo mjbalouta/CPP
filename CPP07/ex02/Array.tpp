@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 17:21:47 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/09 17:55:19 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/11 18:00:37 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ template <typename T>
 Array<T>::Array() : _array(NULL), _size(0) {}
 
 template <typename T>
-Array<T>::Array(unsigned int n) : _array(new T[n]), _size(n) {}
+Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n) {}
 
 template <typename T>
 Array<T>::Array(const Array<T>& copy) : _array(NULL), _size(0)
@@ -30,9 +30,9 @@ Array<T>& Array<T>::operator=(const Array<T>& copy)
 	if (this != &copy)
 	{
 		delete[] _array;
-		_array = new T[_size];
 		_size = copy._size;
-		for (unsigned int = 0; i < _size; i++)
+		_array = new T[_size]; //deep copy
+		for (unsigned int i = 0; i < _size; i++)
 			_array[i] = copy._array[i];
 	}
 	return *this;
@@ -47,4 +47,12 @@ template <typename T>
 unsigned int Array<T>::size() const
 {
 	return (_size);
+}
+
+template <typename T>
+T& Array<T>::operator[](unsigned int index)
+{
+	if (index >= _size)
+		throw IndexException();
+	return _array[index];
 }
