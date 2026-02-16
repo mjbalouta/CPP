@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 15:47:49 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/05 18:10:23 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:18:10 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ Serializer::Serializer(const Serializer& copy)
 
 Serializer& Serializer::operator=(const Serializer& copy)
 {
-	if (this != &copy)
-		*this = copy;
+	(void)copy;
 	return *this;
 }
 

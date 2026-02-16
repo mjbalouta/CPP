@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:53:52 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/02 11:51:56 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:13:46 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int main(int ac, char **av)
 {
-	if (ac > 2)
+	if (ac != 2)
 	{
-		std::cout << "Too many arguents." << std::endl;
+		std::cout << "Error. Usage is <program name> <data to convert>" << std::endl;
 		return (1);
 	}
 	ScalarConverter::convert(av[1]);
+	return 0;
 }

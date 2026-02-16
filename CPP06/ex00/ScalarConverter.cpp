@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:28:02 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/02 17:25:05 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:15:19 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,91 @@ ScalarConverter::ScalarConverter(const ScalarConverter& copy)
 }
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy)
 {
-	if (this != &copy)
-		*this = copy;
+	(void)copy;
 	return *this;
 }
 
 ScalarConverter::~ScalarConverter() {}
 
-DataType ScalarConverter::detectFormat(const std::string& data)
+bool detectFloat(const int countDots, const int countFs, const int countDigits, const std::string &data)
+{
+	if (data == "nanf")
+    	return true;
+	if (data == "+inff" || data == "-inff")
+    	return true;
+	size_t size = data.length();
+	int notDigits = 0;
+	if (countDots == 1 && countFs == 1 && data[size - 1] == 'f')
+	{
+		notDigits = 2;
+		size_t position = data.find('.', 0);
+		if (data[0] == '-' || data[0] == '+')
+		{
+			notDigits = 3;
+			if (position == 1 || position == size - 2)
+				return false;
+		}
+		else
+		{
+			if (position == 0 || position == size - 2)
+				return false;	
+		}
+		if (countDigits == (static_cast<int>(size)) - notDigits)
+			return true;
+	}
+	return false;
+}
+
+bool detectInt(const int countDots, const int countFs, const int countDigits, const std::string &data)
+{
+	if (countDots == 0 && countFs == 0)
+	{
+		int size = data.length();
+		if (countDigits == size)
+			return true;
+		else if (countDigits == size - 1 && (data[0] == '-' || data[0] == '+') && size > 1)
+			return true;
+	}
+	return false;
+}
+
+bool detectDouble(const int countDots, const int countFs, const int countDigits, const std::string &data)
+{
+	if (data == "nan")
+   		return true;
+	if (data == "+inf" || data == "-inf")
+		return true;
+	size_t size = data.length();
+	int notDigits = 0;
+	if (countDots == 1 && countFs == 0)
+	{
+		notDigits = 1;
+		size_t position = data.find('.', 0);
+		if (data[0] == '-' || data[0] == '+')
+		{
+			notDigits = 2;
+			if (position == 1 || position == size - 1)
+				return false;
+		}
+		else
+		{
+			if (position == 0 || position == size - 1)
+				return false;
+		}
+		if (countDigits == (static_cast<int>(size)) - notDigits)
+			return true;
+	}
+	return false;
+}
+
+bool detectChar(const int countDigits, const std::string &data)
+{
+	if (countDigits == 0 && data.length() == 1)
+		return true;
+	return false;
+}
+
+DataType detectFormat(const std::string& data)
 {	
 	int countDots = 0;
 	int countFs = 0;
@@ -54,119 +131,48 @@ DataType ScalarConverter::detectFormat(const std::string& data)
 	return INVALID;
 }
 
-bool ScalarConverter::detectFloat(const int countDots, const int countFs, const int countDigits, const std::string &data)
-{
-	if (data == "nanf" || data == "+nanf" || data == "-nanf")
-    	return true;
-	if (data == "inff" || data == "+inff" || data == "-inff")
-    	return true;
-	size_t size = data.length();
-	int notDigits = 0;
-	if (countDots == 1 && countFs == 1 && data[size - 1] == 'f')
-	{
-		notDigits = 2;
-		size_t position = data.find('.', 0);
-		if (data[0] == '-' || data[0] == '+')
-		{
-			notDigits = 3;
-			if (position == 1 || position == size - 2)
-				return false;
-		}
-		else
-		{
-			if (position == 0 || position == size - 2)
-				return false;	
-		}
-		if (countDigits == (static_cast<int>(size)) - notDigits)
-			return true;
-	}
-	return false;
-}
-
-bool ScalarConverter::detectInt(const int countDots, const int countFs, const int countDigits, const std::string &data)
-{
-	if (countDots == 0 && countFs == 0)
-	{
-		int size = data.length();
-		if (countDigits == size)
-			return true;
-		else if (countDigits == size - 1 && (data[0] == '-' || data[0] == '+') && size > 1)
-			return true;
-	}
-	return false;
-}
-
-bool ScalarConverter::detectDouble(const int countDots, const int countFs, const int countDigits, const std::string &data)
-{
-	if (data == "nan" || data == "+nan" || data == "-nan")
-   		return true;
-	if (data == "inf" || data == "+inf" || data == "-inf")
-		return true;
-	size_t size = data.length();
-	int notDigits = 0;
-	if (countDots == 1 && countFs == 0)
-	{
-		notDigits = 1;
-		size_t position = data.find('.', 0);
-		if (data[0] == '-' || data[0] == '+')
-		{
-			notDigits = 2;
-			if (position == 1 || position == size - 1)
-				return false;
-		}
-		else
-		{
-			if (position == 0 || position == size - 1)
-				return false;
-		}
-		if (countDigits == (static_cast<int>(size)) - notDigits)
-			return true;
-	}
-	return false;
-}
-
-bool ScalarConverter::detectChar(const int countDigits, const std::string &data)
-{
-	if (countDigits == 0 && data.length() == 1)
-		return true;
-	return false;
-}
-
-void ScalarConverter::convertFromChar(const std::string& data)
+void convertFromChar(const std::string& data)
 {
 	char c = data[0];
-	if (std::isprint((static_cast<unsigned char>(c))))
-		std::cout << "char: '" << c << "'" << std::endl;
-	else
-		std::cout << "char: Non displayable" << std::endl;
-		
-	std::cout << "int: " << (static_cast<int>(c)) << std::endl;
+	std::cout << "char: '" << c << "'" << std::endl;
+	std::cout << "int: " << static_cast<int>(c) << std::endl;		
 	float f = static_cast<float>(c);
 	std::cout << "float: " << f << ".0f" << std::endl;
 	double d = static_cast<double>(c);
 	std::cout << "double: " << d << ".0" << std::endl;
 }
 
-void ScalarConverter::convertFromInt(const std::string& data)
+void convertFromInt(const std::string& data)
 {
-	int num = std::atoi(data.c_str());
-	char c = static_cast<char>(num);
-	if (num > CHAR_MAX || num < CHAR_MIN)
+	double d = std::strtod(data.c_str(), NULL);
+
+	if (d < 0 || d > 127)
 		std::cout << "char: impossible" << std::endl;
-	else if (std::isprint(c))
-		std::cout << "char: '" << c << "'" << std::endl;
+	else if (std::isprint(static_cast<char>(d)))
+		std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
-	std::cout << "int: " << num << std::endl;
-	float f = static_cast<float>(num);
-	std::cout << "float: " << f << ".0f" << std::endl;
-	double d = static_cast<double>(num);
-	std::cout << "double: " << d << ".0" << std::endl;
+		
+	if (d >= static_cast<double>(std::numeric_limits<int>::min()) && d <= static_cast<double>(std::numeric_limits<int>::max())) //check for int overflow
+		std::cout << "int: " << static_cast<int>(d) << std::endl;
+	else
+		std::cout << "int: impossible" << std::endl;
+	
+	float f = static_cast<float>(d);
+	std::cout << "float: " << f;
+	if (f > -1000000 && f < 1000000 && f == static_cast<int>(f))
+		std::cout << ".0";
+	std::cout << "f" << std::endl;
+	
+	std::cout << "double: " << d;
+	if (d > -1000000 && d < 1000000 && d == static_cast<int>(d))
+		std::cout << ".0";
+	std::cout << std::endl;
 }
 
-void ScalarConverter::convertFromFloat(const std::string& data)
+void convertFromFloat(const std::string& data)
 {
-	if (data == "nanf" || data == "+inff" || data == "-inff" || data == "inff")
+	if (data == "nanf" || data == "+inff" || data == "-inff")
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
@@ -179,7 +185,7 @@ void ScalarConverter::convertFromFloat(const std::string& data)
 	
 	float f = static_cast<float>(std::strtod(data.c_str(), NULL));
 	char c = static_cast<char>(f);
-	if (f > CHAR_MAX || f < CHAR_MIN)
+	if (f < 0 || f > 127)
 		std::cout << "char: impossible" << std::endl;
 	else if (std::isprint(c))
 		std::cout << "char: '" << c << "'" << std::endl;
@@ -192,20 +198,20 @@ void ScalarConverter::convertFromFloat(const std::string& data)
 		std::cout << "int: impossible" << std::endl;
 		
 	std::cout << "float: " << f;
-	if (f == static_cast<int>(f)) //if f is a round number
+	if (f > -1000000 && f < 1000000 && f == static_cast<int>(f))
 		std::cout << ".0";
 	std::cout << "f" << std::endl;
 	
 	double d = static_cast<double>(f);
 	std::cout << "double: " << d;
-	if (d == static_cast<int>(d))
+	if (d > -1000000 && d < 1000000 && d == static_cast<int>(d))
 		std::cout << ".0";
 	std::cout << std::endl;
 }
 
-void ScalarConverter::convertFromDouble(const std::string& data)
+void convertFromDouble(const std::string& data)
 {
-	if (data == "nan" || data == "+inf" || data == "-inf" || data == "inf")
+	if (data == "nan" || data == "+inf" || data == "-inf")
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
@@ -216,7 +222,7 @@ void ScalarConverter::convertFromDouble(const std::string& data)
 
 	double d = std::strtod(data.c_str(), NULL);
 	char c = static_cast<char>(d);
-	if (d > CHAR_MAX || d < CHAR_MIN)
+	if (d < 0 || d > 127)
 		std::cout << "char: impossible" << std::endl;
 	else if (std::isprint(c))
 		std::cout << "char: '" << c << "'" << std::endl;
@@ -230,17 +236,17 @@ void ScalarConverter::convertFromDouble(const std::string& data)
 
 	float f = static_cast<float>(d);
 	std::cout << "float: " << f;
-	if (f == static_cast<int>(f))
+	if (f > -1000000 && f < 1000000 && f == static_cast<int>(f))
 		std::cout << ".0";
 	std::cout << "f" << std::endl;
 
 	std::cout << "double: " << d;
-	if (d == static_cast<int>(d))
+	if (d > -1000000 && d < 1000000 && d == static_cast<int>(d))
 		std::cout << ".0";
 	std::cout << std::endl;
 }
 
-void ScalarConverter::convertFromInvalid(void)
+void convertFromInvalid(void)
 {
 	std::cout << "char: impossible" << std::endl;
  	std::cout << "int: impossible" << std::endl;
@@ -254,16 +260,16 @@ void ScalarConverter::convert(const std::string& data)
 	
 	switch (typeOfData)
 	{
-		case 0:
+		case CHAR:
 			convertFromChar(data);
 			break;
-		case 1:
+		case INT:
 			convertFromInt(data);
 			break;
-		case 2:
+		case FLOAT:
 			convertFromFloat(data);
 			break;
-		case 3:
+		case DOUBLE:
 			convertFromDouble(data);
 			break;
 		default:
