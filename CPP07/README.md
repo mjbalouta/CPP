@@ -1,4 +1,4 @@
-# CPP06
+# CPP07
 
 ## EX00
 <b>Main Problem</b>: Implement function templates in order for them to work with any type of data (int, string, etc).
