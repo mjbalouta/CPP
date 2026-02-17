@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 13:54:51 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/16 15:51:53 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:48:14 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ class FindException : public std::exception
 };
 
 template <typename T>
-unsigned int easyfind(T container, int toFind)
+typename T::const_iterator easyfind(const T& container, int toFind)
 {
-	unsigned int position = std::find(container.begin(), container.end(), toFind);
-	if (!position)
+	typename T::const_iterator it = std::find(container.begin(), container.end(), toFind);
+	if (it == container.end())
 		throw FindException();
-	return position;
+	return it;
 }
