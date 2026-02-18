@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:52:47 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/17 16:57:19 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:46:44 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,26 @@ class Span
 	void addNumber(int number);
 	unsigned int shortestSpan() const;
 	unsigned int longestSpan() const;
-	void addMultipleNumbers(std::vector<int>::iterator numbers);
+	template <typename T>
+	void addMultipleNumbers(T begin, T end)
+	{
+		int nrElementsToAdd = std::distance(begin, end);
+		
+		if (_numbers.size() + nrElementsToAdd > _capacity)
+			throw FullCapacityException();
+		
+		_numbers.insert(_numbers.end(), begin, end);
+
+		//for testing:
+		// std::cout << "_numbers vector with the added values: ";
+		// for (std::vector<int>::iterator it = _numbers.begin(); it != _numbers.end(); ++it)
+		// {
+		// 	std::cout << *it;
+		// 	if (it != _numbers.end() - 1)
+		// 		std::cout << ", ";
+		// }
+		// std::cout << std::endl;
+	}
 
 	class FullCapacityException : public std::exception
 	{

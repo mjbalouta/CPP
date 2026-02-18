@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:52:49 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/17 17:32:29 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:05:43 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ unsigned int Span::longestSpan() const
 	int result = greatest - lowest;
 	return static_cast<unsigned int>(result);
 }
+
 
