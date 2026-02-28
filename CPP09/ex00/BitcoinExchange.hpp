@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:42:36 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/27 16:07:23 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/28 11:49:35 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ class BitcoinExchange
 	private:
 	std::map<std::string, double> _database;
 	void loadDatabase();
-	void parseDate(const std::string& date) const;
-	void parseRate(const std::string& rate) const;
+	void parseDate(std::string& date) const;
+	void parseRate(std::string& rate) const;
+	void parseFirstLine(const std::string& firstLine) const;
 
 	public:
 	BitcoinExchange();

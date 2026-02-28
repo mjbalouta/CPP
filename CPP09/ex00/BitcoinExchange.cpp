@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 17:42:39 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2026/02/27 16:25:01 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2026/02/28 11:54:03 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,25 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& copy)
 
 BitcoinExchange::~BitcoinExchange() {}
 
-void BitcoinExchange::parseDate(const std::string& date) const
+std::string& trimSpaces(std::string& str)
 {
+	//set of chars to search against
+	const std::string whitespace = " \t\n\r\f\v";
+	
+	/*searches for the index of first not whitespace and erases everything
+	from beggining of str until that pos*/
+	str.erase(0, str.find_first_not_of(whitespace));
+	
+	/*erases everything from the pos of the last not whitespace (+1) until
+	the end of the string*/
+	str.erase(str.find_last_not_of(whitespace) + 1);
+
+	return str;
+}
+
+void BitcoinExchange::parseDate(std::string& date) const
+{
+	date = trimSpaces(date);
 	if (date.length() != 10)
 		throw InputWrongException();
 	if (date[4] != '-' || date[7] != '-')
@@ -36,7 +53,7 @@ void BitcoinExchange::parseDate(const std::string& date) const
 	{
 		if (i == 4 || i == 7)
 			continue;
-		if (!std::isdigit(date[i]))
+		if (!std::isdigit(static_cast<unsigned char>(date[i])))
 			throw InputWrongException();
 	}
 	//usage substr(position, nr of digits)
@@ -70,16 +87,17 @@ void BitcoinExchange::parseDate(const std::string& date) const
 		throw InputWrongException();
 }
 
-void BitcoinExchange::parseRate(const std::string& rate) const
+void BitcoinExchange::parseRate(std::string& rate) const
 {
+	rate = trimSpaces(rate);
 	if (rate.empty())
 		throw InputWrongException();
 
 	int dotCount = 0;
-	for (int i = 0; i < rate.size(); i++)
+	for (size_t i = 0; i < rate.size(); i++)
 	{
 		//first and last pos must be a digit (can't be a '.')
-		if ((i == 0 || i == rate.size() - 1) && !std::isdigit(rate[i]))
+		if ((i == 0 || i == rate.size() - 1) && !std::isdigit(static_cast<unsigned char>(rate[i])))
 			throw InputWrongException();
 		//every other character must be a digit or a '.'
 		if (!std::isdigit(rate[i]) && rate[i] != '.')
@@ -96,6 +114,23 @@ void BitcoinExchange::parseRate(const std::string& rate) const
 			throw InputWrongException();
 }
 
+void BitcoinExchange::parseFirstLine(const std::string& firstLine) const
+{
+	size_t separator = firstLine.find(',');
+	if (separator != std::string::npos)
+	{
+		std::string firstPart = firstLine.substr(0, separator);
+		std::string secondPart = firstLine.substr(separator + 1);
+	
+		firstPart = trimSpaces(firstPart);
+		secondPart = trimSpaces(secondPart);
+		if (firstPart != "date" || secondPart != "value")
+			throw InputWrongException();	
+	}
+	else
+		throw InputWrongException();
+}
+
 void BitcoinExchange::loadDatabase()
 {
 	std::ifstream file("data.csv");
@@ -106,22 +141,33 @@ void BitcoinExchange::loadDatabase()
 	std::string date;
 	std::string rate;
 	std::string line;
+	bool firstLine = true;
 	//for each line, it will split the first part into date and the second into rate
 	while (std::getline(file, line))
 	{
+		if (line.empty())
+            continue;
+		if (firstLine)
+		{
+			parseFirstLine(line);
+			firstLine = false;
+			continue;	
+		}
 		size_t pos = line.find(',');
 		if (pos != std::string::npos)
 		{
-			std::string date = line.substr(0, pos);
-			std::string rate = line.substr(pos + 1);
+			date = line.substr(0, pos);
+			rate = line.substr(pos + 1);
 		}
 		else
 			throw InputWrongException();
-		//add here parse for date and parse for rate
 		parseDate(date);
-		
+		parseRate(rate);
+		//converts from string to double
+		double rateValue = std::atof(rate.c_str());
+		//stores in map
+		_database[date] = rateValue;
 	}
-	
 }
 
 
