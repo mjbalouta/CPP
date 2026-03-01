@@ -87,36 +87,36 @@ void BitcoinExchange::parseDate(std::string& date) const
 		throw InputWrongException();
 }
 
-void BitcoinExchange::parseRate(std::string& rate) const
+void BitcoinExchange::parseValue(std::string& value) const
 {
-	rate = trimSpaces(rate);
-	if (rate.empty())
+	value = trimSpaces(value);
+	if (value.empty())
 		throw InputWrongException();
 
 	int dotCount = 0;
-	for (size_t i = 0; i < rate.size(); i++)
+	for (size_t i = 0; i < value.size(); i++)
 	{
 		//first and last pos must be a digit (can't be a '.')
-		if ((i == 0 || i == rate.size() - 1) && !std::isdigit(static_cast<unsigned char>(rate[i])))
+		if ((i == 0 || i == value.size() - 1) && !std::isdigit(static_cast<unsigned char>(value[i])))
 			throw InputWrongException();
 		//every other character must be a digit or a '.'
-		if (!std::isdigit(rate[i]) && rate[i] != '.')
+		if (!std::isdigit(value[i]) && value[i] != '.')
 			throw InputWrongException();
-		if (rate[i] == '.')
+		if (value[i] == '.')
 			dotCount++;
 		if (dotCount > 1)
 			throw InputWrongException();
 	}
 	
 	//using double works for both int and float
-	double number = std::atof(rate.c_str());
+	double number = std::atof(value.c_str());
 		if (number < 0 || number > 1000)
 			throw InputWrongException();
 }
 
 void BitcoinExchange::parseFirstLine(const std::string& firstLine) const
 {
-	size_t separator = firstLine.find(',');
+	size_t separator = firstLine.find('|');
 	if (separator != std::string::npos)
 	{
 		std::string firstPart = firstLine.substr(0, separator);
@@ -145,11 +145,8 @@ void BitcoinExchange::loadDatabase()
 	//for each line, it will split the first part into date and the second into rate
 	while (std::getline(file, line))
 	{
-		if (line.empty())
-            continue;
 		if (firstLine)
 		{
-			parseFirstLine(line);
 			firstLine = false;
 			continue;	
 		}
@@ -159,10 +156,6 @@ void BitcoinExchange::loadDatabase()
 			date = line.substr(0, pos);
 			rate = line.substr(pos + 1);
 		}
-		else
-			throw InputWrongException();
-		parseDate(date);
-		parseRate(rate);
 		//converts from string to double
 		double rateValue = std::atof(rate.c_str());
 		//stores in map
@@ -170,4 +163,34 @@ void BitcoinExchange::loadDatabase()
 	}
 }
 
+void BitcoinExchange::processInput(const std::string& filename) const
+{
+	loadDatabase();
+	std::ifstream input(filename);
+	if (!input.is_open())
+		throw OpenInputFileException();
+	std::string date;
+	std::string value;
+	std::string line;
+	bool firstLine = true;
+	while (std::getline(input, line))
+	{
+		if (firstLine)
+		{
+			parseFirstLine(line);
+			firstLine = false;
+			continue;
+		}
+		size_t pos = line.find('|');
+		if (pos != std::string::npos)
+		{
+			date = line.substr(0, pos);
+			value = line.substr(pos + 1);
+		}
+		parseDate(date);
+		parseValue(value);
+		//search in map for the date and do the calculations of value * exchange rate here and print in format
+		//date => value = result of value * exchange rate
+	}
+}
 

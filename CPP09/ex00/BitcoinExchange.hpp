@@ -24,7 +24,7 @@ class BitcoinExchange
 	std::map<std::string, double> _database;
 	void loadDatabase();
 	void parseDate(std::string& date) const;
-	void parseRate(std::string& rate) const;
+	void parseValue(std::string& value) const;
 	void parseFirstLine(const std::string& firstLine) const;
 
 	public:
