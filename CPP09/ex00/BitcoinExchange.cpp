@@ -42,19 +42,18 @@ std::string& trimSpaces(std::string& str)
 	return str;
 }
 
-void BitcoinExchange::parseDate(std::string& date) const
+bool BitcoinExchange::validDate(std::string& date) const
 {
-	date = trimSpaces(date);
 	if (date.length() != 10)
-		throw InputWrongException();
+		return false;
 	if (date[4] != '-' || date[7] != '-')
-		throw InputWrongException();
+		return false;
 	for (int i = 0; i < 10; i++)
 	{
 		if (i == 4 || i == 7)
 			continue;
 		if (!std::isdigit(static_cast<unsigned char>(date[i])))
-			throw InputWrongException();
+			return false;
 	}
 	//usage substr(position, nr of digits)
 	int year = std::atoi(date.substr(0, 4).c_str());
@@ -64,14 +63,14 @@ void BitcoinExchange::parseDate(std::string& date) const
 	//parsing year
 	//leap year (february with 29 days)
 	if (year < 1)
-		throw InputWrongException();
+		return false;
 	int leapYear = 0;
 	if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
 		leapYear = 1;
 	
 	//parsing month
 	if (month < 1 || month > 12)
-		throw InputWrongException();
+		return false;
 	int maxDays = 0;
 	if (month == 2 && leapYear == 1)
 		maxDays = 29;
@@ -84,34 +83,39 @@ void BitcoinExchange::parseDate(std::string& date) const
 	
 	//parsing day
 	if (day > maxDays || day < 1)
-		throw InputWrongException();
+		return false;
+	return true;
 }
 
-void BitcoinExchange::parseValue(std::string& value) const
+std::string BitcoinExchange::validValue(std::string& value) const
 {
-	value = trimSpaces(value);
 	if (value.empty())
-		throw InputWrongException();
+		return "Error: empty value.";
 
 	int dotCount = 0;
 	for (size_t i = 0; i < value.size(); i++)
 	{
+		if (i == 0 && value[0] == '-' && value.size() > 1)
+			return "Error: not a positive number.";	
 		//first and last pos must be a digit (can't be a '.')
 		if ((i == 0 || i == value.size() - 1) && !std::isdigit(static_cast<unsigned char>(value[i])))
-			throw InputWrongException();
+			return "Error: not a valid number.";
 		//every other character must be a digit or a '.'
 		if (!std::isdigit(value[i]) && value[i] != '.')
-			throw InputWrongException();
+			return "Error: not a valid number.";
 		if (value[i] == '.')
 			dotCount++;
 		if (dotCount > 1)
-			throw InputWrongException();
+			return "Error: not a valid number.";
 	}
 	
 	//using double works for both int and float
 	double number = std::atof(value.c_str());
-		if (number < 0 || number > 1000)
-			throw InputWrongException();
+	if (number < 0)
+		return "Error: not a positive number.";
+	else if (number > 1000)
+		return "Error: too large a number.";
+	return "Valid.";
 }
 
 void BitcoinExchange::parseFirstLine(const std::string& firstLine) const
@@ -163,10 +167,10 @@ void BitcoinExchange::loadDatabase()
 	}
 }
 
-void BitcoinExchange::processInput(const std::string& filename) const
+void BitcoinExchange::processInput(const std::string& filename)
 {
 	loadDatabase();
-	std::ifstream input(filename);
+	std::ifstream input(filename.c_str());
 	if (!input.is_open())
 		throw OpenInputFileException();
 	std::string date;
@@ -187,10 +191,31 @@ void BitcoinExchange::processInput(const std::string& filename) const
 			date = line.substr(0, pos);
 			value = line.substr(pos + 1);
 		}
-		parseDate(date);
-		parseValue(value);
-		//search in map for the date and do the calculations of value * exchange rate here and print in format
+		else
+			date = line;
+		date = trimSpaces(date);
+		value = trimSpaces(value);
+		if (!validDate(date))
+		{
+			std::cout << "Error: bad input => " << date << std::endl;
+			continue;
+		}
+		if (validValue(value) != "Valid.")
+		{
+			std::cout << validValue(value) << std::endl;
+			continue;
+		}
+		//using upper_bound() to find the one element that is greater than the date
+		//then we subtract one and we get the exact date or the one immediately before
+		std::map<std::string, double>::const_iterator it = _database.upper_bound(date);
+		if (it == _database.end())
+		{
+			std::cout << "Error: not a match for the " << date << "date." << std::endl;
+			continue ;
+		}
+		--it;
 		//date => value = result of value * exchange rate
+		std::cout << date << " => " << value << " = " << std::atof(value.c_str()) * it->second << std::endl;
 	}
 }
 

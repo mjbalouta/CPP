@@ -23,8 +23,8 @@ class BitcoinExchange
 	private:
 	std::map<std::string, double> _database;
 	void loadDatabase();
-	void parseDate(std::string& date) const;
-	void parseValue(std::string& value) const;
+	bool validDate(std::string& date) const;
+	std::string validValue(std::string& value) const;
 	void parseFirstLine(const std::string& firstLine) const;
 
 	public:
@@ -33,16 +33,14 @@ class BitcoinExchange
 	BitcoinExchange& operator=(const BitcoinExchange& copy);
 	~BitcoinExchange();
 
-	void processInput(const std::string& filename) const;
+	void processInput(const std::string& filename);
 
 	class InputWrongException : public std::exception
 	{
 		public:
 		virtual const char* what() const throw()
 		{
-			return "Invalid input format. \
-			Must be date | value, with date being 'year-month-day' and value \
-			a positive float or integer between 0 and 1000.";
+			return "Invalid input format. Must be date | value, with date being 'year-month-day' and value a positive float or integer between 0 and 1000.";
 		}
 	};
 
