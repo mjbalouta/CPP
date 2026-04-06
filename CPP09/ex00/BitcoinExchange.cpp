@@ -208,7 +208,7 @@ void BitcoinExchange::processInput(const std::string& filename)
 		//using upper_bound() to find the one element that is greater than the date
 		//then we subtract one and we get the exact date or the one immediately before
 		std::map<std::string, double>::const_iterator it = _database.upper_bound(date);
-		if (it == _database.end())
+		if (it == _database.begin())
 		{
 			std::cout << "Error: not a match for the " << date << "date." << std::endl;
 			continue ;
