@@ -47,4 +47,13 @@ class PmergeMe
 			return "Error: Only numbers in the <0-INT_MAX> range are allowed.";
 		}
 	};
+
+	class DuplicateNumberException : public std::exception
+	{
+		public:
+		virtual const char* what() const throw()
+		{
+			return "Error: Duplicates are not allowed.";
+		}
+	};
 };

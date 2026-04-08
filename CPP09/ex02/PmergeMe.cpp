@@ -21,14 +21,26 @@ void PmergeMe::parseArgs(int ac, char **av)
 {
 	for (int i = 1; i < ac; i++)
 	{
+		//check if it is a decimal number
 		std::string arg = av[i];
 		if (arg.find('.') != std::string::npos)
 			throw DecimalNumberException();
+
+		//check positive integer limits
 		long number = std::atol(av[i]);
 		if (number < 0)
 			throw NegativeNumberException();
 		if (number > INT_MAX)
 			throw MaxNumberException();
+
+		//check if it is a duplicate
+		for (std::deque<int>::iterator it = _deque.begin(); it != _deque.end(); ++it)
+		{
+			if (*it == number)
+				throw DuplicateNumberException();
+		}
+
+		//add to containers
 		_deque.push_back(number);
 		_list.push_back(number);
 	}
