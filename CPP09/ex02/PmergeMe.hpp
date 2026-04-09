@@ -19,6 +19,7 @@ class PmergeMe
 
 	void groupPairs();
 	void orderDequeWinners(std::deque<std::pair<int, int> >& pairs);
+	void orderDequeWinners(std::list<std::pair<int, int> >& pairs);
 
 	public:
 	PmergeMe();
