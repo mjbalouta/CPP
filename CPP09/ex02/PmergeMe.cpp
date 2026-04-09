@@ -65,6 +65,7 @@ void PmergeMe::printNumbers(const std::string& keyword) const
 void PmergeMe::processAlgorithm()
 {
 	groupPairs();
+	orderDequeWinners(_dequePairs);
 }
 
 void PmergeMe::groupPairs()
@@ -100,5 +101,33 @@ void PmergeMe::groupPairs()
 			_listPairs.push_back(std::make_pair(second, first));
 		++it;
 	}
+}
+
+void PmergeMe::orderDequeWinners(std::deque<std::pair<int, int> >& pairs)
+{
+	if (pairs.size() <= 1)
+		return;
+
+	size_t mid = pairs.size() / 2;
+	std::deque<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
+	std::deque<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
+
+	orderDequeWinners(left);
+	orderDequeWinners(right);
+
+	size_t i = 0, j = 0, k = 0;
+	while (i < left.size() && j < right.size())
+	{
+		if (left[i].first < right[j].first)
+			pairs[k++] = left[i++];
+		else
+			pairs[k++] = right[j++];
+	}
+
+	while (i < left.size())
+		pairs[k++] = left[i++];
+
+	while (j < right.size())
+		pairs[k++] = right[j++];
 }
 

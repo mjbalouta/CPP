@@ -18,6 +18,7 @@ class PmergeMe
 	int _listLeftover;
 
 	void groupPairs();
+	void orderDequeWinners(std::deque<std::pair<int, int> >& pairs);
 
 	public:
 	PmergeMe();
