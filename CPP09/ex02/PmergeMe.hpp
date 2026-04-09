@@ -5,12 +5,19 @@
 #include <list>
 #include <cstdlib>
 #include <climits>
+#include <utility>
 
 class PmergeMe
 {
 	private:
 	std::deque<int> _deque;
+	std::deque<std::pair<int, int> > _dequePairs;
+	int _dequeLeftover;
 	std::list<int> _list;
+	std::list<std::pair<int, int> > _listPairs;
+	int _listLeftover;
+
+	void groupPairs();
 
 	public:
 	PmergeMe();
@@ -20,6 +27,7 @@ class PmergeMe
 
 	void parseArgs(int ac, char **av);
 	void printNumbers(const std::string& keyword) const;
+	void processAlgorithm();
 
 	class NegativeNumberException : public std::exception
 	{
