@@ -138,32 +138,20 @@ void PmergeMe::orderListWinners(std::list<std::pair<int, int> >& pairs)
 		return;
 
 	size_t middle = pairs.size() / 2;
+	std::list<std::pair<int, int> >::iterator middleIt = pairs.begin();
+	//to advance middleIt to the middle position
+	std::advance(middleIt, middle);
 
-	for (std::list<std::pair<int, int> >::iterator pairIt = pairs.begin(); pairIt != middle; ++pairIt)
-	{
-		
-	}
+	//middleIt is included in the right one (the first iterator is inclusive, the second is exclusive)
+	std::list<std::pair<int, int> > left(pairs.begin(), middleIt);
+	std::list<std::pair<int, int> > right(middleIt, pairs.end());
 
-	// std::deque<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
-	// std::deque<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
-
-	orderDequeWinners(left);
-	orderDequeWinners(right);
+	orderListWinners(left);
+	orderListWinners(right);
 
 	size_t i = 0, j = 0, k = 0;
-// 	while (i < left.size() && j < right.size())
-// 	{
-// 		if (left[i].first < right[j].first)
-// 			pairs[k++] = left[i++];
-// 		else
-// 			pairs[k++] = right[j++];
-// 	}
-
-// 	while (i < left.size())
-// 		pairs[k++] = left[i++];
-
-// 	while (j < right.size())
-// 		pairs[k++] = right[j++];
-// }
+	while (i < left.size() && j < right.size())
+	{
+		if ()
+	}
 }
-
