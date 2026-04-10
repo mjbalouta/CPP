@@ -73,6 +73,8 @@ void PmergeMe::processAlgorithm()
 	orderDequeWinners(_dequePairs);
 	orderListWinners(_listPairs);
 	generateJacobsthalNumbers();
+	insertDequeLosers();
+	// insertListLosers();
 	//insertLoosers
 }
 
@@ -206,5 +208,45 @@ void PmergeMe::generateJacobsthalNumbers()
 		int nextNumber = _jacob[i - 1] + 2 * (_jacob[i - 2]);
 		_jacob.push_back(nextNumber);
 		i++;
+	}
+}
+
+void PmergeMe::insertDequeLosers()
+{
+	_deque.clear();
+
+	//push just the winners to the _deque chain
+	for (std::deque<std::pair<int, int> >::iterator it = _dequePairs.begin(); it != _dequePairs.end(); ++it)
+		_deque.push_back(it->first);
+
+	//insert the first looser (guaranteed it is the lowest number)
+	std::deque<std::pair<int, int > >::iterator pairsIt = _dequePairs.begin();
+	// std::deque<int>::iterator dequeIt = _deque.begin();
+	// _deque.insert(dequeIt, pairsIt->second);
+
+	std::vector<int>::iterator jacobIt = _jacob.begin();
+
+	//loop to pick the next looser
+	for (pairsIt = _dequePairs.begin() + 1; pairsIt != _dequePairs.end(); ++pairsIt)
+	{
+		int indexToSearchLooser = *jacobIt;
+		int lastIndexToSearchLooser = 0;
+		while (indexToSearchLooser > lastIndexToSearchLooser)
+		{
+			int looserToInsert = _dequePairs[indexToSearchLooser].second;
+			//loop to find the position of the winner that belongs to the looser
+			int winnerToFind = _dequePairs[indexToSearchLooser].first;
+			for (std::deque<int>::iterator it = _deque.begin(); it != _deque.end(); ++it)
+			{
+				if (*it == winnerToFind)
+				{
+					//insertion search will now be made until this boundary
+					_deque.insert(std::lower_bound(_deque.begin(), it), looserToInsert);
+					break ;
+				}
+			}
+			indexToSearchLooser--;
+		}
+
 	}
 }

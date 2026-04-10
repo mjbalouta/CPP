@@ -24,6 +24,7 @@ class PmergeMe
 	void orderDequeWinners(std::deque<std::pair<int, int> >& pairs);
 	void orderListWinners(std::list<std::pair<int, int> >& pairs);
 	void generateJacobsthalNumbers();
+	void insertDequeLosers();
 
 	public:
 	PmergeMe();
