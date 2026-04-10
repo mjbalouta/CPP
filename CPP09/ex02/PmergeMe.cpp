@@ -146,12 +146,39 @@ void PmergeMe::orderListWinners(std::list<std::pair<int, int> >& pairs)
 	std::list<std::pair<int, int> > left(pairs.begin(), middleIt);
 	std::list<std::pair<int, int> > right(middleIt, pairs.end());
 
+	//after creating left and right, we need to clear the original one to store there the sorted pairs
+	pairs.clear();
+
 	orderListWinners(left);
 	orderListWinners(right);
 
-	size_t i = 0, j = 0, k = 0;
-	while (i < left.size() && j < right.size())
+	std::list<std::pair<int, int> >::iterator leftIt = left.begin();
+	std::list<std::pair<int, int> >::iterator rightIt = right.begin();
+	while (leftIt != left.end() && rightIt != right.end())
 	{
-		if ()
+		if (leftIt->first < rightIt->first)
+		{
+			pairs.push_back(*leftIt);
+			++leftIt;	
+		}
+		else
+		{
+			pairs.push_back(*rightIt);
+			++rightIt;
+		}
+	}
+
+	//if there are remaining pairs in left or right after all the
+	//comparisons, we should do individual loops to add them to pairs
+	while (leftIt != left.end())
+	{
+		pairs.push_back(*leftIt);
+		++leftIt;
+	}
+
+	while (rightIt != right.end())
+	{
+		pairs.push_back(*rightIt);
+		++rightIt;
 	}
 }
