@@ -1,10 +1,11 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() : _dequeLeftover(-1), _listLeftover(-1) {}
+PmergeMe::PmergeMe() : _dequeLeftover(-1), _listLeftover(-1), _loosersSize(0) {}
 
 PmergeMe::PmergeMe(const PmergeMe& copy) :
 _deque(copy._deque), _list(copy._list), _dequePairs(copy._dequePairs), _listPairs(copy._listPairs),
-_dequeLeftover(copy._dequeLeftover), _listLeftover(copy._listLeftover) {}
+_dequeLeftover(copy._dequeLeftover), _listLeftover(copy._listLeftover), _jacob(copy._jacob),
+_loosersSize(copy._loosersSize) {}
 	
 PmergeMe& PmergeMe::operator=(const PmergeMe& copy)
 {
@@ -14,6 +15,10 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& copy)
 		_list = copy._list;
 		_dequePairs = copy._dequePairs;
 		_listPairs = copy._listPairs;
+		_dequeLeftover = copy._dequeLeftover;
+		_listLeftover = copy._listLeftover;
+		_jacob = copy._jacob;
+		_loosersSize = copy._loosersSize;
 	}
 	return *this;
 }
@@ -67,6 +72,8 @@ void PmergeMe::processAlgorithm()
 	groupPairs();
 	orderDequeWinners(_dequePairs);
 	orderListWinners(_listPairs);
+	generateJacobsthalNumbers();
+	//insertLoosers
 }
 
 void PmergeMe::groupPairs()
@@ -180,5 +187,24 @@ void PmergeMe::orderListWinners(std::list<std::pair<int, int> >& pairs)
 	{
 		pairs.push_back(*rightIt);
 		++rightIt;
+	}
+}
+
+void PmergeMe::generateJacobsthalNumbers()
+{
+	if (_dequeLeftover >= 0)
+		_loosersSize = 1;
+	_loosersSize += (int)_dequePairs.size();
+
+	//push the first two jacobsthal numbers
+	_jacob.push_back(0);
+	_jacob.push_back(1);
+
+	int i = 2;
+	while (_jacob.back() < _loosersSize)
+	{
+		int nextNumber = _jacob[i - 1] + 2 * (_jacob[i - 2]);
+		_jacob.push_back(nextNumber);
+		i++;
 	}
 }

@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <climits>
 #include <utility>
+#include <vector>
 
 class PmergeMe
 {
@@ -16,10 +17,13 @@ class PmergeMe
 	std::list<int> _list;
 	std::list<std::pair<int, int> > _listPairs;
 	int _listLeftover;
+	std::vector<int> _jacob;
+	int _loosersSize;
 
 	void groupPairs();
 	void orderDequeWinners(std::deque<std::pair<int, int> >& pairs);
 	void orderListWinners(std::list<std::pair<int, int> >& pairs);
+	void generateJacobsthalNumbers();
 
 	public:
 	PmergeMe();
