@@ -73,6 +73,8 @@ void PmergeMe::processAlgorithm()
 	orderDequeWinners(_dequePairs);
 	orderListWinners(_listPairs);
 	generateJacobsthalNumbers();
+	if (_jacob.empty())
+		return;
 	insertDequeLosers();
 	// insertListLosers();
 	//insertLoosers
@@ -219,34 +221,41 @@ void PmergeMe::insertDequeLosers()
 	for (std::deque<std::pair<int, int> >::iterator it = _dequePairs.begin(); it != _dequePairs.end(); ++it)
 		_deque.push_back(it->first);
 
-	//insert the first looser (guaranteed it is the lowest number)
-	std::deque<std::pair<int, int > >::iterator pairsIt = _dequePairs.begin();
-	// std::deque<int>::iterator dequeIt = _deque.begin();
-	// _deque.insert(dequeIt, pairsIt->second);
+	//insert the first looser (guaranteed it is the lowest number, so we reduce the number of comparisons by doing this)
+	_deque.insert(_deque.begin(), _dequePairs[0].second);
 
 	std::vector<int>::iterator jacobIt = _jacob.begin();
-
-	//loop to pick the next looser
-	for (pairsIt = _dequePairs.begin() + 1; pairsIt != _dequePairs.end(); ++pairsIt)
+	//jump until *jacobIt > 1 because we already handled the index 0
+	while (jacobIt != _jacob.end() && *jacobIt <= 1)
+		jacobIt++;
+	
+	//loop to insert the loosers
+	int lastIndexToSearchLooser = 1;
+	while (jacobIt != _jacob.end())
 	{
 		int indexToSearchLooser = *jacobIt;
-		int lastIndexToSearchLooser = 0;
-		while (indexToSearchLooser > lastIndexToSearchLooser)
-		{
-			int looserToInsert = _dequePairs[indexToSearchLooser].second;
-			//loop to find the position of the winner that belongs to the looser
-			int winnerToFind = _dequePairs[indexToSearchLooser].first;
-			for (std::deque<int>::iterator it = _deque.begin(); it != _deque.end(); ++it)
-			{
-				if (*it == winnerToFind)
-				{
-					//insertion search will now be made until this boundary
-					_deque.insert(std::lower_bound(_deque.begin(), it), looserToInsert);
-					break ;
-				}
-			}
-			indexToSearchLooser--;
-		}
 
+		//defining the startIndex for the loosers insertion
+		int startIndex = indexToSearchLooser - 1; //because indexes start at 0
+		if (startIndex >= (int)_dequePairs.size()) //if startIndex goes out of bounds of the loosers
+			startIndex = (int)_dequePairs.size() - 1;
+
+		while (startIndex >= lastIndexToSearchLooser)
+		{
+			int looserToInsert = _dequePairs[startIndex].second;
+			int winnerToFind = _dequePairs[startIndex].first;
+			//to find the position of the winner that belongs to the looser
+			std::deque<int>::iterator limit = std::find(_deque.begin(), _deque.end(), winnerToFind);
+			//insertion search will now be made until this boundary
+			_deque.insert(std::lower_bound(_deque.begin(), limit, looserToInsert), looserToInsert);
+			startIndex--;
+		}
+		jacobIt++;
+		lastIndexToSearchLooser = indexToSearchLooser;
 	}
+
+//if the numbers were odd numbered, we insert here that last saved number
+if (_dequeLeftover != -1)
+	_deque.insert(std::lower_bound(_deque.begin(), _deque.end(), _dequeLeftover), _dequeLeftover);
+
 }

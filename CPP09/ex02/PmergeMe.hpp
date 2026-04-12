@@ -7,6 +7,7 @@
 #include <climits>
 #include <utility>
 #include <vector>
+#include <algorithm>
 
 class PmergeMe
 {
