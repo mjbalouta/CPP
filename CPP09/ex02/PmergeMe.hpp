@@ -8,24 +8,36 @@
 #include <utility>
 #include <vector>
 #include <algorithm>
+#include <sys/time.h>
+#include <iomanip> 
 
 class PmergeMe
 {
 	private:
 	std::deque<int> _deque;
-	std::deque<std::pair<int, int> > _dequePairs;
-	int _dequeLeftover;
 	std::list<int> _list;
+	std::deque<std::pair<int, int> > _dequePairs;
 	std::list<std::pair<int, int> > _listPairs;
+	int _dequeLeftover;
 	int _listLeftover;
-	std::vector<int> _jacob;
-	int _loosersSize;
+	std::vector<int> _jacobDeque;
+	std::vector<int> _jacobList;
+	long long _startTimeDeque;
+	long long _endTimeDeque;
+	long long _endTimeList;
+	long long _startTimeList;
 
-	void groupPairs();
+	void groupPairsDeque();
+	void groupPairsList();
 	void orderDequeWinners(std::deque<std::pair<int, int> >& pairs);
 	void orderListWinners(std::list<std::pair<int, int> >& pairs);
-	void generateJacobsthalNumbers();
+	void generateJacobsthalNumbersDeque();
+	void generateJacobsthalNumbersList();
 	void insertDequeLosers();
+	void insertListLosers();
+	long long getCurrentTime() const;
+	void printTimeIntervals() const;
+	void printNumbers(const std::string& keyword) const;
 
 	public:
 	PmergeMe();
@@ -34,7 +46,6 @@ class PmergeMe
 	~PmergeMe();
 
 	void parseArgs(int ac, char **av);
-	void printNumbers(const std::string& keyword) const;
 	void processAlgorithm();
 
 	class NegativeNumberException : public std::exception
@@ -46,12 +57,12 @@ class PmergeMe
 		}
 	};
 
-	class DecimalNumberException : public std::exception
+	class NotANumberException : public std::exception
 	{
 		public:
 		virtual const char* what() const throw()
 		{
-			return "Error: Decimal numbers are not allowed.";
+			return "Error: Only numbers are allowed.";
 		}
 	};
 

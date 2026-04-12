@@ -11,15 +11,10 @@ int main(int ac, char **av)
 	{
 		PmergeMe p;
 		p.parseArgs(ac, av);
-		p.printNumbers("Before: ");
-		//functions to apply the algorithm
-		p.printNumbers("After: ");
-		//print time it took to order in the first container
-		//print time it took to order in the second container
+		p.processAlgorithm();
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	
 }
