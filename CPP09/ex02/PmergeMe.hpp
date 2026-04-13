@@ -38,6 +38,8 @@ class PmergeMe
 	long long getCurrentTime() const;
 	void printTimeIntervals() const;
 	void printNumbers(const std::string& keyword) const;
+	void parseArgsDeque(int ac, char **av);
+	void parseArgsList(int ac, char **av);
 
 	public:
 	PmergeMe();
@@ -45,8 +47,7 @@ class PmergeMe
 	PmergeMe& operator=(const PmergeMe& copy);
 	~PmergeMe();
 
-	void parseArgs(int ac, char **av);
-	void processAlgorithm();
+	void processAlgorithm(int ac, char **av);
 
 	class NegativeNumberException : public std::exception
 	{

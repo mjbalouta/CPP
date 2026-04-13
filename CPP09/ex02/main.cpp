@@ -10,8 +10,7 @@ int main(int ac, char **av)
 	try
 	{
 		PmergeMe p;
-		p.parseArgs(ac, av);
-		p.processAlgorithm();
+		p.processAlgorithm(ac, av);
 	}
 	catch(const std::exception& e)
 	{

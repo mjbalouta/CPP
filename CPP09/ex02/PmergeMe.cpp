@@ -30,11 +30,15 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& copy)
 
 PmergeMe::~PmergeMe() {}
 
-void PmergeMe::parseArgs(int ac, char **av)
+void PmergeMe::parseArgsDeque(int ac, char **av)
 {
 	for (int i = 1; i < ac; i++)
 	{
 		std::string arg = av[i];
+
+		//check empty string
+		if (arg.empty())
+			throw NotANumberException();
 
 		//check if it is digit
 		for (size_t j = 0; j < arg.length(); j++)
@@ -61,8 +65,45 @@ void PmergeMe::parseArgs(int ac, char **av)
 				throw DuplicateNumberException();
 		}
 
-		//add to containers
 		_deque.push_back(number);
+	}
+}
+
+void PmergeMe::parseArgsList(int ac, char **av)
+{
+	for (int i = 1; i < ac; i++)
+	{
+		std::string arg = av[i];
+
+		//check empty string
+		if (arg.empty())
+			throw NotANumberException();
+
+		//check if it is digit
+		for (size_t j = 0; j < arg.length(); j++)
+		{
+			if (!std::isdigit(arg[j]) && arg[j] != '+' && arg[j] != '-')
+				throw NotANumberException();
+			if ((arg[j] == '+' && j != 0) || (arg[j] == '+' && arg.length() == 1))
+				throw NotANumberException();
+			if ((arg[j] == '-' && j != 0) || (arg[j] == '-' && arg.length() == 1))
+				throw NotANumberException();
+		}
+
+		//check positive integer limits
+		long number = std::atol(av[i]);
+		if (number < 0)
+			throw NegativeNumberException();
+		if (number > INT_MAX)
+			throw MaxNumberException();
+
+		//check if it is a duplicate
+		for (std::list<int>::iterator it = _list.begin(); it != _list.end(); ++it)
+		{
+			if (*it == number)
+				throw DuplicateNumberException();
+		}
+
 		_list.push_back(number);
 	}
 }
@@ -80,12 +121,12 @@ void PmergeMe::printNumbers(const std::string& keyword) const
 	// std::cout << std::endl;
 }
 
-void PmergeMe::processAlgorithm()
+void PmergeMe::processAlgorithm(int ac, char **av)
 {
-	printNumbers("Before: ");
-
 	//algorithm with deque
 	_startTimeDeque = getCurrentTime();
+	parseArgsDeque(ac, av);
+	printNumbers("Before: ");
 	groupPairsDeque();
 	orderDequeWinners(_dequePairs);
 	generateJacobsthalNumbersDeque();
@@ -96,15 +137,16 @@ void PmergeMe::processAlgorithm()
 	
 	//algorithm with list
 	_startTimeList = getCurrentTime();
+	parseArgsList(ac, av);
 	groupPairsList();
 	orderListWinners(_listPairs);
 	generateJacobsthalNumbersList();
 	if (_jacobList.empty())
 		return;
 	insertListLosers();
+	printNumbers("After: ");
 	_endTimeList = getCurrentTime();
 
-	printNumbers("After: ");
 	printTimeIntervals();
 }
 
